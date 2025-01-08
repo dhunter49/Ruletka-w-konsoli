@@ -1,3 +1,5 @@
+// Plik zawiera funkcje zwi¹zane z zapisywaniem gry oraz odczytywaniem z pliku.
+
 #include <fstream>
 #include <iostream>
 #include <ctime>
@@ -6,19 +8,16 @@
 using namespace std;
 
 bool czyGraczJuzGral() {
-	ifstream bazaDanych("Ruletka_ZapisGry.txt");
+	ifstream bazaDanych("Ruletka_ZapisGry.json");
 	if (bazaDanych.is_open()) {
 		bazaDanych.close();
 		return true;
 	}
-	//ofstream bazaDanychOut("Ruletka_ZapisGry.txt");
-	//bazaDanychOut << "";
-	//bazaDanychOut.close();
 	return false;
 }
 
 double wczytajKaseGracza() {
-	ifstream bazaDanych("Ruletka_ZapisGry.txt");
+	ifstream bazaDanych("Ruletka_ZapisGry.json");
 	double kasaZPliku;
 	bazaDanych >> kasaZPliku;
 	//SPRAWDZ DATE
@@ -53,13 +52,13 @@ double wczytajKaseGracza() {
 }
 
 bool zapiszGre(double kasaDoZapisu,bool czyZapisacDate) {
-	ifstream bazaDanychWczyt("Ruletka_ZapisGry.txt");
+	ifstream bazaDanychWczyt("Ruletka_ZapisGry.json");
 	double kasaTemp;
 	time_t czasZPliku;
 	bazaDanychWczyt >> kasaTemp >> czasZPliku;
 	bazaDanychWczyt.close();
 	fstream bazaDanych;
-	bazaDanych.open("Ruletka_ZapisGry.txt", ios::out | ios::trunc);
+	bazaDanych.open("Ruletka_ZapisGry.json", ios::out | ios::trunc);
 	if (!(bazaDanych.is_open())) {
 		return false;
 	}

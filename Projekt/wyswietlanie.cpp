@@ -1,3 +1,5 @@
+// Plik zawiera fukcje wyœwietlaj¹ce stó³ ruletki oraz tor wyœcigowy
+
 #include <iostream>
 #include <iomanip>
 #include "Header.h"

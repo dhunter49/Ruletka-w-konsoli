@@ -1,3 +1,5 @@
+// Plik zawiera funkcje odpowiedzialne za wszystkie rodzaje zak³adów
+
 #include <chrono>
 #include <thread>
 #include <istream>
@@ -116,8 +118,8 @@ void postawNaWiele() {
             if(!(postawNaWieleObl(poleGorne,poleDolne,kwota)))
             {
                 //Z³a kombinacja liczb
-                cout << "Nieprawid³owa kombinacja liczb, powtórz obstawianie.";
-                this_thread::sleep_for(chrono::seconds(3));
+                cout << "Nieprawid³owa kombinacja liczb. Kliknij dowolny przycisk aby ponowiæ obstawianie.";
+                _getch();
                 continue;
             }
             else
@@ -421,7 +423,7 @@ void postawNaFinals() {
         }
         if (finalCyfra >= 0 && finalCyfra <= 9) {
             if (finalCyfra <= 6 && kasaGracza < 2) {
-                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 2 z³\nKliknij przycisk aby kontynuowaæ...";
+                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 2 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
                 _getch();
                 return;
             }
@@ -461,7 +463,7 @@ void zakladyOgloszone() {
             if(kasaGracza>=3)
                 postawNaTiers();
             else {
-                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 3 z³\nKliknij przycisk aby kontynuowaæ...";
+                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 3 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
                 _getch();
             }
             break;
@@ -470,7 +472,7 @@ void zakladyOgloszone() {
             if(kasaGracza>=2.5)
                 postawNaOrphelins();
             else {
-                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 2.50 z³\nKliknij przycisk aby kontynuowaæ...";
+                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 2.50 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
                 _getch();
             }
             break;
@@ -479,7 +481,7 @@ void zakladyOgloszone() {
             if(kasaGracza>=3.5)
                 postawNaVoisins();
             else {
-                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 3.50 z³\nKliknij przycisk aby kontynuowaæ...";
+                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 3.50 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
                 _getch();
             }
             break;
@@ -488,7 +490,7 @@ void zakladyOgloszone() {
             if(kasaGracza>=1.5)
                 postawNaSasiadow();
             else {
-                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 1.50 z³\nKliknij przycisk aby kontynuowaæ...";
+                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 1.50 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
                 _getch();
             }
             break;
@@ -497,7 +499,7 @@ void zakladyOgloszone() {
             if(kasaGracza>=1.5)
                 postawNaFinals();
             else {
-                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 1.50 z³\nKliknij przycisk aby kontynuowaæ...";
+                cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 1.50 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
                 _getch();
             }
             break;

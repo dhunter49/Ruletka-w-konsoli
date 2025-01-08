@@ -1,3 +1,5 @@
+// G³ówny plik, znajduje siê tutaj parê koniecznych funkcji
+
 #include <chrono>
 #include <thread>
 #include <istream>
@@ -13,19 +15,6 @@
 
 using namespace std;
 
-// Znaki potrzebne do wyœwietlenia tablicy
-const char znakLewyGornyRog = 218;
-const char znakPrawyGornyRog = 191;
-const char znakLewyDolnyRog = 192;
-const char znakPrawyDolnyRog = 217;
-const char znakSciana = 179;
-const char znakSufit = 196;
-const char znakTabelaSrodek = 197;
-const char znakTabelaGora = 194;
-const char znakTabelaDol = 193;
-const char znakTabelaLewo = 195;
-const char znakTabelaPrawo = 180;
-
 // Tablica czerwonych liczb
 const int red[18] = { 1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36 };
 
@@ -38,9 +27,10 @@ const string reset = "\033[0m";
 double kasaGracza = 0;
 double tabelaWygranych[37] = {};
 
-bool znajdzCzyCzerwone(int liczba);
-int zakrecKolem(); 
-double wartoscZetonu(int iloscZetonow, double minimalnyZaklad);
+// Deklaracja funkcji
+bool znajdzCzyCzerwone(int liczba); // Sprawdza czy liczba jest czerwona
+int zakrecKolem(); // Losuje liczbe z przedzia³u <0;36>
+double wartoscZetonu(int iloscZetonow, double minimalnyZaklad); // Prosi o wprowadzenie wartoœci jednego ¿
 double wartoscZakladu(double minimalnyZaklad);
 void oglosWygrana(int wylosowanaLiczba);
 void zresetujTabeleWygranych();
@@ -52,14 +42,14 @@ int main() {
         cout << "Witaj ponownie!\n";
         kasaGracza = wczytajKaseGracza();
         if (kasaGracza < 0.5) { // Sprawdzamy czy gracz ma wiêcej ni¿ minimalny zak³ad (0.5)
-            cout << "Niestety masz za ma³o pieniêdzy aby zagraæ!\nPoczekaj na dzienny bonus!\n\nKliknij dowolny przycisk aby zakoñczyæ dzia³anie gry.";
+            cout << "Niestety masz za ma³o pieniêdzy aby zagraæ!\nPoczekaj na dzienny bonus!\n\nKliknij dowolny przycisk aby zakoñczyæ dzia³anie gry...";
             _getch();
             return 0;
         }
-        cout << "Twój stan konta : " << kasaGracza<< "\n\nKliknij dowolny przycisk aby zacz¹æ grê.";
+        cout << "Twój stan konta : " << kasaGracza<< "\n\nKliknij dowolny przycisk aby zacz¹æ grê...";
     }
     else {
-        cout << "Witaj nowy graczu!\nNa start otrzymujesz 500 z³.\n\nKliknij dowolny przycisk aby zacz¹æ grê.";
+        cout << "Witaj nowy graczu!\nNa start otrzymujesz 500 z³.\n\nKliknij dowolny przycisk aby zacz¹æ grê...";
         kasaGracza = 500;
         if (!(zapiszGre(kasaGracza, true))) {
             cout << "B³¹d w zapisie, gra nie zostanie zapisana!";
@@ -112,64 +102,64 @@ int main() {
                 if(kasaGracza>=5)
                     postawNaParzyste(true);
                 else {
-                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³";
-                    this_thread::sleep_for(chrono::seconds(3));
+                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
+                    _getch();
                 }
                 break;
             case 'o':
                 if(kasaGracza>=5)
                     postawNaParzyste(false);
                 else {
-                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³";
-                    this_thread::sleep_for(chrono::seconds(3));
+                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
+                    _getch();
                 }
                     break;
             case 'b':
                 if (kasaGracza >= 5)
                     postawNaCzerwone(false);
                 else {
-                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³";
-                    this_thread::sleep_for(chrono::seconds(3));
+                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
+                    _getch();
                 }
                 break;
             case 'r':
                 if (kasaGracza >= 5)
                     postawNaCzerwone(true);
                 else {
-                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³";
-                    this_thread::sleep_for(chrono::seconds(3));
+                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
+                    _getch();
                 }
                 break;
             case 'h':
                 if (kasaGracza >= 5)
                     postawNaWysokie(true);
                 else {
-                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³";
-                    this_thread::sleep_for(chrono::seconds(3));
+                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
+                    _getch();
                 }
                 break;
             case 'l':
                 if (kasaGracza >= 5)
                     postawNaWysokie(false);
                 else {
-                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³";
-                    this_thread::sleep_for(chrono::seconds(3));
+                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 5 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
+                    _getch();
                  }
                 break;
             case 'd':
                 if (kasaGracza >=2.5)
                     postawNaTuzin();
                 else {
-                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad 2,50 z³";
-                    this_thread::sleep_for(chrono::seconds(3));
+                    cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad 2.50 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
+                    _getch();
                 }
                 break;
             case 'w':
                 if (kasaGracza >=2.5)
                     postawNaLinie();
                 else {
-                    cout<<"Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad 2,50 z³";
-                    this_thread::sleep_for(chrono::seconds(3));
+                    cout<<"Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad 2.50 z³\nKliknij dowolny przycisk aby kontynuowaæ...";
+                    _getch();
                 }
                 break;
             case 'a':
@@ -179,8 +169,8 @@ int main() {
                 wyswietlZaklady();
                 break;
             default:
-                cout << "Niepoprawny punkt z menu!\n";
-                this_thread::sleep_for(chrono::seconds(3));
+                cout << "Niepoprawny punkt z menu!\n\nKliknij dowolny przycisk aby kontynuowaæ...";
+                _getch();
                 break;
             }
             system("CLS");
@@ -207,7 +197,7 @@ int main() {
         _getch();
         system("CLS");
         if (kasaGracza < 0.5) {
-            cout << "Niestety masz za ma³o pieniêdzy aby kontynuowaæ grê!\nPoczekaj na dzienny bonus!\n\nKliknij dowolny przycisk aby zakoñczyæ dzia³anie gry.";
+            cout << "Niestety masz za ma³o pieniêdzy aby kontynuowaæ grê!\nPoczekaj na dzienny bonus!\n\nKliknij dowolny przycisk aby zakoñczyæ dzia³anie gry...";
             _getch();
             return 0;
         }
@@ -255,7 +245,7 @@ int zakrecKolem() {
     wylosowana3 = rand() % 37;
     wylosowana4 = rand() % 37;
     wylosowana5 = rand() % 37;
-    int wylosujWylosowana = rand() % 5 + 1;
+    int wylosujWylosowana = rand() % 5 + 1; // Zwiêksza losowoœæ liczby
     switch (wylosujWylosowana) {
     case 1:
         return wylosowana1;
@@ -327,7 +317,7 @@ double wartoscZakladu(double minimalnyZaklad) {
 
 void oglosWygrana(int wylosowanaLiczba) {
     if (tabelaWygranych[wylosowanaLiczba] == 0)
-        cout << "Nic nie wygra³eœ, powodzenia w dalszych partiach.\n";
+        cout << "Nic nie wygra³aœ/eœ, powodzenia w dalszych partiach.\n";
     else {
         cout << "Wygrana: " << tabelaWygranych[wylosowanaLiczba]<<" z³\n";
         kasaGracza += tabelaWygranych[wylosowanaLiczba];
