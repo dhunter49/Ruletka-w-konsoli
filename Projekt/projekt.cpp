@@ -38,7 +38,7 @@ void zresetujTabeleWygranych();
 int main() {
     srand(time(0));
     setlocale(LC_ALL, "PL_pl");
-    if (czyGraczJuzGral()) {
+    if (czyGraczJuzGral()) { //DODAÆ MENU GRACZA I INSTRUKCJÊ
         cout << "Witaj ponownie!\n";
         kasaGracza = wczytajKaseGracza();
         if (kasaGracza < 0.5) { // Sprawdzamy czy gracz ma wiêcej ni¿ minimalny zak³ad (0.5)
@@ -46,20 +46,29 @@ int main() {
             _getch();
             return 0;
         }
-        cout << "Twój stan konta : " << kasaGracza<< "\n\nKliknij dowolny przycisk aby zacz¹æ grê...";
+        cout << "Twój stan konta : " << kasaGracza;
     }
     else {
-        cout << "Witaj nowy graczu!\nNa start otrzymujesz 500 z³.\n\nKliknij dowolny przycisk aby zacz¹æ grê...";
+        cout << "Witaj nowy graczu!\nNa start otrzymujesz 500 z³.";
         kasaGracza = 500;
         if (!(zapiszGre(kasaGracza, true))) {
             cout << "B³¹d w zapisie, gra nie zostanie zapisana!";
         }
     }
-    _getch();
+    char wyborZMenu;
+    cout << "\n\n> Start - SPACE\n> Instrukcja - H\n> WyjdŸ - ESC\n";
+    while (true) {
+        wyborZMenu = _getch();
+        if(wyborZMenu==27)
+            return 0;
+        else if(wyborZMenu==32)
+            break;
+        else if(wyborZMenu== 'h')
+            wyswietlInstrukcje();
+    }
     int wylosowanaLiczba;
     auto czasStartuObstawiania = chrono::steady_clock::now();
     const int duration = 60;
-    char wyborZMenu;
     while (true) {
         zresetujTabeleWygranych();
         czasStartuObstawiania = chrono::steady_clock::now(); // Zapisz czas rozpoczêcia

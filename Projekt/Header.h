@@ -31,3 +31,4 @@ bool zapiszGre(double,bool);
 //wyswietlanie.cpp
 void wyswietlTablice();
 void wyswietlTabliceOgloszona();
+void wyswietlInstrukcje();
