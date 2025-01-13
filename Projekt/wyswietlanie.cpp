@@ -275,7 +275,7 @@ void wyswietlInstrukcje() {
     wybor = _getch();
     system("CLS");
     if (wybor == 27) {
-        cout << "> Start - SPACE\n> Instrukcja - H\n> Wyjdü - ESC\n";
+        wyswietlMenu();
         return;
     }
     cout << "Po rozpoczÍciu gry zobaczysz stÛ≥ do gry oraz menu dziÍki ktÛremu wybierzesz swoje obstawienia:\n\n"
@@ -297,7 +297,7 @@ void wyswietlInstrukcje() {
     wybor = _getch();
     system("CLS");
     if (wybor == 27) {
-        cout << "> Start - SPACE\n> Instrukcja - H\n> Wyjdü - ESC\n";
+        wyswietlMenu();
         return;
     }
     int tab[37];
@@ -308,7 +308,7 @@ void wyswietlInstrukcje() {
     wybor = _getch();
     system("CLS");
     if (wybor == 27) {
-        cout << "> Start - SPACE\n> Instrukcja - H\n> Wyjdü - ESC\n";
+        wyswietlMenu();
         return;
     }
     cout << "POSTAW NA WIELE - polega na postawieniu øetonu miÍdzy dwa, trzy, cztery lub szeúÊ pÛl,\n"
@@ -327,7 +327,7 @@ void wyswietlInstrukcje() {
     wybor = _getch();
     system("CLS");
     if (wybor == 27) {
-        cout << "> Start - SPACE\n> Instrukcja - H\n> Wyjdü - ESC\n";
+        wyswietlMenu();
         return;
     }
     cout << "POSTAW NA 1/3 STO£U - \n"
@@ -339,21 +339,67 @@ void wyswietlInstrukcje() {
     wybor = _getch();
     system("CLS");
     if (wybor == 27) {
-        cout << "> Start - SPACE\n> Instrukcja - H\n> Wyjdü - ESC\n";
+        wyswietlMenu();
         return;
     }
     cout << "POSTAW NA 1/2 STO£U - \n"
         << "- na czerwone/czarne - stawia na czarne lub czerwone\n"
         << "- na niskie/wysokie - stawia na pierwszπ (1-18) lub drugπ (19-36) po≥owe sto≥u\n"
-        << "- na parzyste/nieparzyste - stawia na wsyztskie liczby parzyste lub nieparzyste\n"
+        << "- na parzyste/nieparzyste - stawia na wszystkie liczby parzyste lub nieparzyste\n"
         << "potencjalna wygrana wynosi wtedy: wartoúÊ zak≥adu.\n";
     wyswietlTablice();
     cout << "\n\nKliknij ESC aby wyjúÊ z instrukcji\nKliknij dowolny przycisk aby kontynuowaÊ...";
     wybor = _getch();
     system("CLS");
     if (wybor == 27) {
-        cout << "> Start - SPACE\n> Instrukcja - H\n> Wyjdü - ESC\n";
+        wyswietlMenu();
         return;
     }
+    cout << "ZAK£ADY OG£OSZONE - sπ to zak≥ady wielu øetonÛw ktÛre bazujπ siÍ na u≥oøeniu \n"
+        << "liczb na tarczy ko≥a do ruletki, rzadko uøywane, czÍúciej przez zaawansowanych graczy.\n"
+        << "Finals - obstawienie na wszystkie liczby ktÛre koÒczπ siÍ na danπ cyfrÍ\n"
+        << "Sπsiedzi (Neighbors) - obstawienie 1-5 liczb sπsiadujπcych z liczbπ na kole (z obu stron), wraz z danπ liczbπ\n"
+        << "Potencjalna nagroda rÛøni siÍ dla kaødego zak≥adu oraz dla wylosowanej liczby z tego zak≥adu.\n";
+    wyswietlTabliceOgloszona();
+    cout << "\n\nKliknij ESC aby wyjúÊ z instrukcji\nKliknij dowolny przycisk aby kontynuowaÊ...";
+    wybor = _getch();
+    system("CLS");
+    if (wybor == 27) {
+        wyswietlMenu();
+        return;
+    }
+    cout << "W celu postawieniu zak≥adu naleøy wybraÊ rodzaj zak≥adu a nastÍpnie postÍpowaÊ zgodnie z informacjami\n"
+        << "na ekranie. Kwoty naleøy wpisywaÊ z kropkπ zamiast przecinka, np. 1,50 z≥ naleøy wpisaÊ jako 1.50\n"
+        << "w przeciwnym razie obstawimy tylko 1 z≥ (zostanie uciÍta wartoúÊ po przecinku)\n";
+    cout << "\n\nKliknij ESC aby wyjúÊ z instrukcji\nKliknij dowolny przycisk aby kontynuowaÊ...";
+    wybor = _getch();
+    system("CLS");
+    if (wybor == 27) {
+        wyswietlMenu();
+        return;
+    }
+    cout << "DZIENNY BONUS\n"
+        << "co 24h gracz otrzymuje 20 z≥, aby otrzymaÊ bonus wystarczy urochomiÊ grÍ.\n"
+        << "Po wykorzystaniu ca≥ej puli pieniÍdzy kontynuwanie gry bÍdzie niemoøliwe.\n";
+    cout << "\n\nKliknij ESC aby wyjúÊ z instrukcji\nKliknij dowolny przycisk aby kontynuowaÊ...";
+    wybor = _getch();
+    system("CLS");
+    if (wybor == 27) {
+        wyswietlMenu();
+        return;
+    }
+    cout << "MINIMALNE ZAK£ADY\n"
+        << "dla 1-6 pÛl - 0,50 z≥\n"
+        << "dla zak≥adÛw na 1/3 sto≥u - 2,50 z≥\n"
+        << "dla zak≥adÛw na 1/2 sto≥u - 5,00 z≥\n"
+        << "dla zak≥adÛw og≥oszonych - 0,50 z≥ * iloúÊ ustawionych øetonÛw";
+    cout << "\n\nKliknij dowolny przycisk aby wyjúÊ z instrukcji...";
+    wybor = _getch();
+    system("CLS");
+    wyswietlMenu();
+}
+
+void wyswietlMenu() {
+    cout << string(25, '-') << endl << "   EUROPEJSKA RULETKA  " << endl << string(25, '-') << endl << endl;
     cout << "> Start - SPACE\n> Instrukcja - H\n> Wyjdü - ESC\n";
 }

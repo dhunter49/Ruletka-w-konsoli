@@ -32,3 +32,4 @@ bool zapiszGre(double,bool);
 void wyswietlTablice();
 void wyswietlTabliceOgloszona();
 void wyswietlInstrukcje();
+void wyswietlMenu();

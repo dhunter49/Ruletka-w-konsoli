@@ -70,9 +70,6 @@ bool zapiszGre(double kasaDoZapisu,bool czyZapisacDate) {
 	}
 	else
 		bazaDanych << czasZPliku << endl;
-	if (!(bazaDanych.is_open())) {
-		return false;
-	}
 	bazaDanych.close();
 	return true;
 }

@@ -38,7 +38,7 @@ void zresetujTabeleWygranych();
 int main() {
     srand(time(0));
     setlocale(LC_ALL, "PL_pl");
-    if (czyGraczJuzGral()) { //DODA∆ MENU GRACZA I INSTRUKCJ 
+    if (czyGraczJuzGral()) { 
         cout << "Witaj ponownie!\n";
         kasaGracza = wczytajKaseGracza();
         if (kasaGracza < 0.5) { // Sprawdzamy czy gracz ma wiÍcej niø minimalny zak≥ad (0.5)
@@ -55,8 +55,9 @@ int main() {
             cout << "B≥πd w zapisie, gra nie zostanie zapisana!";
         }
     }
+    cout << "\n\n";
     char wyborZMenu;
-    cout << "\n\n> Start - SPACE\n> Instrukcja - H\n> Wyjdü - ESC\n";
+    wyswietlMenu();
     while (true) {
         wyborZMenu = _getch();
         if(wyborZMenu==27)
@@ -210,25 +211,12 @@ int main() {
             _getch();
             return 0;
         }
-        while (true) {
-            system("CLS");
-            cout << "Wybierz opcje:\n"
-                << "k - kontynuuj gre\n"
-                << "x - zakoÒcz dzia≥anie gry\n";
-            cin >> wyborZMenu;
-            if (wyborZMenu == 'x')
-                return 0;
-            else if (wyborZMenu == 'k') {
-                cin.ignore(numeric_limits<int>::max(), '\n');
-                break;
-            }
-            else {
-                cout << "Niepoprawny punkt z menu!";
-                cin.clear();
-                cin.ignore(numeric_limits<int>::max(), '\n');
-                this_thread::sleep_for(chrono::seconds(3));
-            }
-        }
+        system("CLS");
+        cout << "Aby kontyuowaÊ grÍ kliknij dowolny przycisk...\n"
+            << "Kliknij ESC aby wyjúÊ z gry.\n";
+        wyborZMenu = _getch();
+        if (wyborZMenu == 27)
+            return 0;
     }
     return 0;
 }
@@ -326,7 +314,7 @@ double wartoscZakladu(double minimalnyZaklad) {
 
 void oglosWygrana(int wylosowanaLiczba) {
     if (tabelaWygranych[wylosowanaLiczba] == 0)
-        cout << "Nic nie wygra≥aú/eú, powodzenia w dalszych partiach.\n";
+        cout << "Nic nie wygra≥*ú, powodzenia w dalszych partiach.\n";
     else {
         cout << "Wygrana: " << tabelaWygranych[wylosowanaLiczba]<<" z≥\n";
         kasaGracza += tabelaWygranych[wylosowanaLiczba];
