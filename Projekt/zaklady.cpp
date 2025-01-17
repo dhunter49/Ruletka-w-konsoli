@@ -1,11 +1,9 @@
 // Plik zawiera funkcje odpowiedzialne za wszystkie rodzaje zak³adów
 
-#include <chrono>
-#include <thread>
-#include <istream>
 #include <locale>
+#include <thread>
+#include <chrono>
 #include <iostream>
-#include <iomanip>
 #include <limits>
 #include <conio.h>
 #include "Header.h"
@@ -346,15 +344,15 @@ void postawNaOrphelins() { // 5 ¿etonów
     kasaGracza -= kwota * 5;
 }
 
-void postawNaVoisins() { // 7 ¿etonów
-    double kwota = wartoscZetonu(7,0.5);
+void postawNaVoisins() { // 9 ¿etonów
+    double kwota = wartoscZetonu(9,0.5);
     int postawione[3] = { 0,2,3 };
-    postawNaZeroObl(postawione, 3, kwota);
+    postawNaZeroObl(postawione, 3, kwota*2); // dwa
     postawNaWieleObl(4, 7, kwota);
     postawNaWieleObl(12, 15, kwota);
     postawNaWieleObl(18, 21, kwota);
     postawNaWieleObl(19, 22, kwota);
-    postawNaWieleObl(26, 28, kwota);
+    postawNaWieleObl(26, 28, kwota*2); // dwa
     postawNaWieleObl(32, 35, kwota);
     kasaGracza -= kwota * 7;
 }
@@ -478,7 +476,7 @@ void zakladyOgloszone() {
             break;
         }
         else if (wyborZMenu == 'v') {
-            if(kasaGracza>=3.5)
+            if(kasaGracza>=4.5)
                 postawNaVoisins();
             else {
                 cout << "Za ma³o pieniêdzy na ten zak³ad! Minimalny zak³ad: 3.50 z³\nKliknij dowolny przycisk aby kontynuowaæ...";

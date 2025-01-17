@@ -2,12 +2,11 @@
 
 #include <chrono>
 #include <thread>
-#include <istream>
 #include <locale>
 #include <iostream>
-#include <iomanip>
 #include <limits>
 #include <conio.h>
+#include <random>
 #include "Header.h"
 
 // https://i.roulette77.pl/zasady-gry
@@ -236,25 +235,10 @@ int zakrecKolem() {
         cout.flush();
         this_thread::sleep_for(chrono::seconds(1));
     }
-    int wylosowana1, wylosowana2, wylosowana3, wylosowana4, wylosowana5;
-    wylosowana1 = rand() % 37;
-    wylosowana2 = rand() % 37;
-    wylosowana3 = rand() % 37;
-    wylosowana4 = rand() % 37;
-    wylosowana5 = rand() % 37;
-    int wylosujWylosowana = rand() % 5 + 1; // Zwiêksza losowoœæ liczby
-    switch (wylosujWylosowana) {
-    case 1:
-        return wylosowana1;
-    case 2:
-        return wylosowana2;
-    case 3:
-        return wylosowana3;
-    case 4:
-        return wylosowana4;
-    case 5:
-        return wylosowana5;
-    }
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(0, 36);
+    return dist(gen);
 }
 
 double wartoscZetonu(int iloscZetonow, double minimalnyZaklad) {

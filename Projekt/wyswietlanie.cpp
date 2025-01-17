@@ -3,8 +3,6 @@
 #include <iostream>
 #include <iomanip>
 #include <conio.h>
-#include <chrono>
-#include <thread>
 #include "Header.h"
 
 using namespace std;
@@ -358,7 +356,7 @@ void wyswietlInstrukcje() {
     cout << "ZAK£ADY OG£OSZONE - s¹ to zak³ady wielu ¿etonów które bazuj¹ siê na u³o¿eniu \n"
         << "liczb na tarczy ko³a do ruletki, rzadko u¿ywane, czêœciej przez zaawansowanych graczy.\n"
         << "Finals - obstawienie na wszystkie liczby które koñcz¹ siê na dan¹ cyfrê\n"
-        << "S¹siedzi (Neighbors) - obstawienie 1-5 liczb s¹siaduj¹cych z liczb¹ na kole (z obu stron), wraz z dan¹ liczb¹\n"
+        << "S¹siedzi (Neighbours) - obstawienie 1-5 liczb s¹siaduj¹cych z liczb¹ na kole (z obu stron), wraz z dan¹ liczb¹\n"
         << "Potencjalna nagroda ró¿ni siê dla ka¿dego zak³adu oraz dla wylosowanej liczby z tego zak³adu.\n";
     wyswietlTabliceOgloszona();
     cout << "\n\nKliknij ESC aby wyjœæ z instrukcji\nKliknij dowolny przycisk aby kontynuowaæ...";
