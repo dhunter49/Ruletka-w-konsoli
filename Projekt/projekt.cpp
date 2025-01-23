@@ -44,7 +44,7 @@ int main() {
             _getch();
             return 0;
         }
-        cout << "Twój stan konta : " << kasaGracza;
+        cout << "Twój stan konta: " << kasaGracza << " z³.";
     }
     else {
         cout << "Witaj nowy graczu!\nNa start otrzymujesz 500 z³.";
