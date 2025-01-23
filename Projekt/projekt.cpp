@@ -29,13 +29,12 @@ double tabelaWygranych[37] = {};
 // Deklaracja funkcji
 bool znajdzCzyCzerwone(int liczba); // Sprawdza czy liczba jest czerwona
 int zakrecKolem(); // Losuje liczbe z przedzia³u <0;36>
-double wartoscZetonu(int iloscZetonow, double minimalnyZaklad); // Prosi o wprowadzenie wartoœci jednego ¿
-double wartoscZakladu(double minimalnyZaklad);
-void oglosWygrana(int wylosowanaLiczba);
-void zresetujTabeleWygranych();
+double wartoscZetonu(int iloscZetonow, double minimalnyZaklad); // Prosi o wprowadzenie wartoœci jednego ¿etonu
+double wartoscZakladu(double minimalnyZaklad); // Prosi o wprowadzenie wartoœci zak³adu
+void oglosWygrana(int wylosowanaLiczba); // Sprawdza czy u¿ytkownik wygra³ oraz wypisuje rezultat rozgrywki
+void zresetujTabeleWygranych(); // Resetuje grê przed kolejn¹ rozgrywk¹
 
 int main() {
-    srand(time(0));
     setlocale(LC_ALL, "PL_pl");
     if (czyGraczJuzGral()) { 
         cout << "Witaj ponownie!\n";
@@ -51,7 +50,7 @@ int main() {
         cout << "Witaj nowy graczu!\nNa start otrzymujesz 500 z³.";
         kasaGracza = 500;
         if (!(zapiszGre(kasaGracza, true))) {
-            cout << "B³¹d w zapisie, gra nie zostanie zapisana!";
+            cout << "\nB³¹d w zapisie, gra nie zostanie zapisana!";
         }
     }
     cout << "\n\n";
@@ -59,11 +58,11 @@ int main() {
     wyswietlMenu();
     while (true) {
         wyborZMenu = _getch();
-        if(wyborZMenu==27)
+        if(wyborZMenu==27) // Klikniêto ESC, wyjœcie z gry
             return 0;
-        else if(wyborZMenu==32)
+        else if(wyborZMenu==32) // Klikniêto SPACJE, rozpoczêcie gry
             break;
-        else if(wyborZMenu== 'h')
+        else if(wyborZMenu== 'h' || wyborZMenu =='H') // Klikniêto h, w³¹czenie instrukcji
             wyswietlInstrukcje();
     }
     int wylosowanaLiczba;
@@ -72,14 +71,15 @@ int main() {
     while (true) {
         zresetujTabeleWygranych();
         czasStartuObstawiania = chrono::steady_clock::now(); // Zapisz czas rozpoczêcia
-        while (chrono::steady_clock::now() - czasStartuObstawiania < chrono::seconds(duration)) {
+        // Pêtla powtarza siê a¿ gracz nie bêdzie obstawia³ przez wiêcej ni¿ 60 sekund
+        while (chrono::steady_clock::now() - czasStartuObstawiania < chrono::seconds(duration)) { 
             if (kasaGracza < 0.5) {
                 cout << "Masz za ma³o pieniêdzy aby obstawiæ wiêcej!\n";
                 break;
             }
             system("CLS");
             wyswietlTablice();
-            cout << "Obecny stan konta: " << kasaGracza << endl
+            cout << "Obecny stan konta: " << kasaGracza << " z³\n"
                 << "Wybierz: \n"
                 << "x - koniec zakladów\n"
                 << "1 - postaw na jeden\n"
@@ -174,21 +174,19 @@ int main() {
             case 'a':
                 zakladyOgloszone();
                 break;
-            case 'z':
-                wyswietlZaklady();
-                break;
             default:
                 cout << "Niepoprawny punkt z menu!\n\nKliknij dowolny przycisk aby kontynuowaæ...";
                 _getch();
                 break;
             }
             system("CLS");
-        }
-        cout << "Koniec obstawiania." << endl;
+        } // Mine³o 60 sekund lub gracz sam zakoñczy³ obstawianie
+        cout << "Koniec obstawiania!" << endl;
         wylosowanaLiczba = zakrecKolem();
         system("CLS");
         wyswietlTablice();
-        cout << "Wylosowana liczba:";
+        //Wyœwietlanie liczby wylosowanej z odpowiednim t³em (czerwonym, zielonym lub czarnym)
+        cout << "Wylosowana liczba: ";
         if (wylosowanaLiczba == 0)
             cout << greenBackground<<" " << wylosowanaLiczba <<" " << reset << endl;
         else if (znajdzCzyCzerwone(wylosowanaLiczba))
@@ -211,7 +209,7 @@ int main() {
             return 0;
         }
         system("CLS");
-        cout << "Aby kontyuowaæ grê kliknij dowolny przycisk...\n"
+        cout << "Aby kontynuowaæ grê kliknij dowolny przycisk...\n"
             << "Kliknij ESC aby wyjœæ z gry.\n";
         wyborZMenu = _getch();
         if (wyborZMenu == 27)
@@ -229,6 +227,7 @@ bool znajdzCzyCzerwone(int liczba) {
 }
 
 int zakrecKolem() {
+    //Przed³u¿enie losowanie za pomoc¹ wyœiwtlania kropek.
     cout << "\nLosowanie liczby";
     for (int i = 0; i < 5;i++) {
         cout << ".";
@@ -247,21 +246,22 @@ double wartoscZetonu(int iloscZetonow, double minimalnyZaklad) {
     double kwotaNaZeton;
         while (true) {
             cout << "Obstawiawiasz " << iloscZetonow << (iloscZetonow < 5 ? " ¿etony!\n" : " ¿etonów!\n");
-            cout << "Podaj wartoœæ JEDNEGO ¿etonu (obecny stan konta: " << kasaGracza << " PLN): ";
+            cout << "Podaj wartoœæ JEDNEGO ¿etonu (obecny stan konta: " << kasaGracza << " z³): ";
             while (!(cin >> kwotaNaZeton)) {
                 cout << "Niepoprawna wartoœæ!\n"
-                    << "Podaj wartoœæ JEDNEGO ¿etonu (obecny stan konta: " << kasaGracza << " PLN): ";
+                    << "Podaj wartoœæ JEDNEGO ¿etonu (obecny stan konta: " << kasaGracza << " z³): ";
                 cin.clear();
                 cin.ignore(numeric_limits<int>::max(), '\n');
             }
-            int tymczasowaDoPrzyblizenia; //Przybli¿ kwotê do 2 miejsc po przecinku, nie ma 0.1 grosza
+            //Przybli¿ kwotê do 2 miejsc po przecinku, nie ma 0.1 grosza
+            int tymczasowaDoPrzyblizenia; 
             kwotaNaZeton = (kwotaNaZeton + 0.005) * 100;
             tymczasowaDoPrzyblizenia = kwotaNaZeton;
             kwotaNaZeton = static_cast<double>(tymczasowaDoPrzyblizenia) / 100;
             if (kwotaNaZeton*static_cast<double>(iloscZetonow) > kasaGracza)
                 cout << "Nie masz tyle pieniêdzy!\n";
             else if (kwotaNaZeton < minimalnyZaklad)
-                cout << "Minimalny zak³ad na ¿eton to " << minimalnyZaklad << " PLN!\n";
+                cout << "Minimalny zak³ad na ¿eton to " << minimalnyZaklad << " z³!\n";
             else
                 break;
         }
@@ -274,22 +274,23 @@ double wartoscZakladu(double minimalnyZaklad) {
     wyswietlTablice();
     double kwota;
     while (true) {
-        cout << "Podaj wartoœæ zak³adu (obecny stan konta: " << kasaGracza << " PLN): ";
+        cout << "Podaj wartoœæ zak³adu (obecny stan konta: " << kasaGracza << " z³): ";
         while (!(cin >> kwota)) { //Sprawdza czy na pewno wartoœæ to double a nie np. tekst.
             cout << "Niepoprawna wartoœæ!\n"
-                << "Podaj wartoœæ zak³adu (obecny stan konta: " << kasaGracza << " PLN): ";
+                << "Podaj wartoœæ zak³adu (obecny stan konta: " << kasaGracza << " z³): ";
             cin.clear();
             cin.ignore(numeric_limits<int>::max(), '\n');
         }
         if (kwota > kasaGracza)
             cout << "Nie masz tyle pieniêdzy!\n";
         else if (kwota < minimalnyZaklad)
-            cout << "Minimalny zak³ad to " << minimalnyZaklad << " PLN!\n";
+            cout << "Minimalny zak³ad to " << minimalnyZaklad << " z³!\n";
         else
             break;
     }
     cin.ignore(numeric_limits<int>::max(), '\n');
-    int tymczasowaDoPrzyblizenia; //Przybli¿ kwotê do 2 miejsc po przecinku, nie ma 0.1 grosza
+    //Przybli¿ kwotê do 2 miejsc po przecinku, nie ma 0.1 grosza
+    int tymczasowaDoPrzyblizenia; 
     kwota = (kwota + 0.005) * 100;
     tymczasowaDoPrzyblizenia = kwota;
     kwota = static_cast<double>(tymczasowaDoPrzyblizenia) / 100;
@@ -298,7 +299,7 @@ double wartoscZakladu(double minimalnyZaklad) {
 
 void oglosWygrana(int wylosowanaLiczba) {
     if (tabelaWygranych[wylosowanaLiczba] == 0)
-        cout << "Nic nie wygra³*œ, powodzenia w dalszych partiach.\n";
+        cout << "Przegrana! Powodzenia w dalszych partiach.\n";
     else {
         cout << "Wygrana: " << tabelaWygranych[wylosowanaLiczba]<<" z³\n";
         kasaGracza += tabelaWygranych[wylosowanaLiczba];

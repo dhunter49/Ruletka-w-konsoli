@@ -42,6 +42,7 @@ bool postawNaWieleObl(int poleGorne, int poleDolne, double kwota) {
         iloscPostawionychLiczb = 2;
         tabelaWygranych[poleGorne] += kwota * 36 / iloscPostawionychLiczb;
         tabelaWygranych[poleDolne] += kwota * 36 / iloscPostawionychLiczb;
+        kasaGracza -= kwota;
         return true;
     }
     else if (poleDolne == poleGorne - 2 && poleGorne % 3 == 0) {
@@ -50,6 +51,7 @@ bool postawNaWieleObl(int poleGorne, int poleDolne, double kwota) {
         tabelaWygranych[poleGorne] += kwota * 36 / iloscPostawionychLiczb;
         tabelaWygranych[poleGorne - 1] += kwota * 36 / iloscPostawionychLiczb;
         tabelaWygranych[poleDolne] += kwota * 36 / iloscPostawionychLiczb;
+        kasaGracza -= kwota;
         return true;
     }
     else if (poleDolne == poleGorne + 2 && (poleGorne % 3 == 0 || poleGorne % 3 == 2)) {
@@ -59,6 +61,7 @@ bool postawNaWieleObl(int poleGorne, int poleDolne, double kwota) {
         tabelaWygranych[poleGorne - 1] += kwota * 36 / iloscPostawionychLiczb;
         tabelaWygranych[poleDolne + 1] += kwota * 36 / iloscPostawionychLiczb;
         tabelaWygranych[poleDolne] += kwota * 36 / iloscPostawionychLiczb;
+        kasaGracza -= kwota;
         return true;
     }
     else if (poleDolne == poleGorne + 1 && poleGorne % 3 == 0) {
@@ -67,6 +70,7 @@ bool postawNaWieleObl(int poleGorne, int poleDolne, double kwota) {
         for (int i = poleGorne - 2;i <= poleDolne + 2;i++) {
             tabelaWygranych[i] += kwota * 36 / iloscPostawionychLiczb;
         }
+        kasaGracza -= kwota;
         return true;
     }
     else
@@ -124,13 +128,13 @@ void postawNaWiele() {
                 break;
         }
     }
-    kasaGracza -= kwota;
 }
 
 void postawNaZeroObl(int postawNa[], double iloscPostawionychLiczb, double kwota) {
     for (int i = 0;i < iloscPostawionychLiczb; i++) {
         tabelaWygranych[postawNa[i]] += kwota * 36 / iloscPostawionychLiczb;
     }
+    kasaGracza -= kwota;
 }
 void postawNaZero(int poleGorne, int poleDolne, double kwota) {
     double iloscPostawionychLiczb = 0;
@@ -331,17 +335,15 @@ void postawNaTiers() { // 6 ¿etonów
     postawNaWieleObl(24, 23, kwota);
     postawNaWieleObl(27, 30, kwota);
     postawNaWieleObl(33, 36, kwota);
-    kasaGracza -= kwota * 6;
 }
 
 void postawNaOrphelins() { // 5 ¿etonów
     double kwota = wartoscZetonu(5,0.5);
     postawNaJedenObl(1, kwota);
-    postawNaWieleObl(3, 9, kwota);
+    postawNaWieleObl(6, 9, kwota);
     postawNaWieleObl(14, 17, kwota);
     postawNaWieleObl(17, 20, kwota);
     postawNaWieleObl(31, 34, kwota);
-    kasaGracza -= kwota * 5;
 }
 
 void postawNaVoisins() { // 9 ¿etonów
@@ -354,7 +356,6 @@ void postawNaVoisins() { // 9 ¿etonów
     postawNaWieleObl(19, 22, kwota);
     postawNaWieleObl(26, 28, kwota*2); // dwa
     postawNaWieleObl(32, 35, kwota);
-    kasaGracza -= kwota * 7;
 }
 
 void postawNaSasiadow() {
